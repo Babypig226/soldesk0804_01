@@ -3,6 +3,7 @@ package Main;
 import java.util.Scanner;
 
 import Main.DTO.RegisterRequest;
+import Main.service.ChangePasswordService;
 import Main.service.MemberInfoPrinter;
 import Main.service.MemberListPrinter;
 import Main.service.MemberRegisterService;
@@ -37,6 +38,15 @@ public class App {
 				mrs.regist(req);
 			}
 			else if(command.startsWith("change ")){
+				String[] arg = command.split(" ");
+				if(arg.length != 4) {
+					printHelp();//static없을 시 객체 생성 필요
+					System.out.println("============================");
+					continue;
+				}else {
+					ChangePasswordService changePwdSvc = new ChangePasswordService();
+					changePwdSvc.changePw(arg[1], arg[2], arg[3]);
+				}
 				
 			}
 			else if(command.equals("list")) {

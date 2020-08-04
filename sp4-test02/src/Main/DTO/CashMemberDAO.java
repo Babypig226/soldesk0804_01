@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemberDAO {
+public class CashMemberDAO {
 	private static long nextId = 0;
 	private static Map<String, MemberDTO> map = new HashMap<String, MemberDTO>();
 	public void insert(MemberDTO dto) {
