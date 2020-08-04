@@ -50,6 +50,7 @@ public class App {
 					continue;
 				}else {
 					ChangePasswordService changePwdSvc = new ChangePasswordService();
+					changePwdSvc.setDao(memberDao);
 					changePwdSvc.changePw(arg[1], arg[2], arg[3]);
 				}
 				

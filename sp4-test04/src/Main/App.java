@@ -5,6 +5,7 @@ import java.util.Scanner;
 import Main.DTO.CashMemberDAO;
 import Main.DTO.MemberDAO;
 import Main.DTO.RegisterRequest;
+import Main.service.Assembler;
 import Main.service.ChangePasswordService;
 import Main.service.MemberInfoPrinter;
 import Main.service.MemberListPrinter;
@@ -12,8 +13,7 @@ import Main.service.MemberPrinter;
 import Main.service.MemberRegisterService;
 
 public class App {
-	private static MemberDAO memberDao = new CashMemberDAO();
-	private static MemberPrinter printer = new MemberPrinter();
+	private static Assembler assembler = new Assembler();
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		while(true) {
@@ -27,7 +27,6 @@ public class App {
 					System.out.println("============================");
 					continue;
 				}
-				//의존객체(Dependency Object): 클래스 안에 있는 클래스(객체)
 				RegisterRequest req = new RegisterRequest();
 				req.setEmail(arg[1]);
 				req.setName(arg[2]);
@@ -38,8 +37,7 @@ public class App {
 					System.out.println("비밀번호가 일치하지 않습니다.");
 					continue;
 				}
-				//Dependency Object
-				MemberRegisterService mrs = new MemberRegisterService(memberDao);
+				MemberRegisterService mrs = assembler.getMemberRegisterService();
 				mrs.regist(req);
 			}
 			else if(command.startsWith("change ")){
@@ -49,14 +47,13 @@ public class App {
 					System.out.println("============================");
 					continue;
 				}else {
-					ChangePasswordService changePwdSvc = new ChangePasswordService();
+					ChangePasswordService changePwdSvc = assembler.getChangePasswordService();
 					changePwdSvc.changePw(arg[1], arg[2], arg[3]);
 				}
 				
 			}
 			else if(command.equals("list")) {
-				//Dependency Object
-				MemberListPrinter listPrint = new MemberListPrinter(memberDao, printer);
+				MemberListPrinter listPrint = assembler.getMemberListPrinter();
 				listPrint.printAll();
 			}
 			else if(command.startsWith("info ")){
@@ -66,10 +63,7 @@ public class App {
 					System.out.println("============================");
 					continue;
 				}else {
-					MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-					//주입
-					infoPrinter.setMemberDAO(memberDao);
-					infoPrinter.setPrinter(printer);
+					MemberInfoPrinter infoPrinter = assembler.getMemberInfoPrinter();
 					infoPrinter.printMemberInfo(arg[1]);
 				}
 			}
