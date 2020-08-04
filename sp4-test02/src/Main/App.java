@@ -3,6 +3,7 @@ package Main;
 import java.util.Scanner;
 
 import Main.DTO.RegisterRequest;
+import Main.service.MemberInfoPrinter;
 import Main.service.MemberListPrinter;
 import Main.service.MemberRegisterService;
 
@@ -36,6 +37,7 @@ public class App {
 				mrs.regist(req);
 			}
 			else if(command.startsWith("change ")){
+				
 			}
 			else if(command.equals("list")) {
 				//Dependency Object
@@ -43,9 +45,21 @@ public class App {
 				listPrint.printAll();
 			}
 			else if(command.startsWith("info ")){
+				String[] arg = command.split(" ");
+				if(arg.length != 2) {
+					printHelp();//static없을 시 객체 생성 필요
+					System.out.println("============================");
+					continue;
+				}else {
+					MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
+					infoPrinter.printMemberInfo(arg[1]);
+				}
 			}
 			else if(command.equals("exit")) {
+				System.out.println("프로그램을 종료합니다.");
 				System.exit(0);
+			}else {
+				printHelp();
 			}
 		}
 		
