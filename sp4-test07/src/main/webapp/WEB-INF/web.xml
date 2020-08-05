@@ -4,4 +4,22 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>
+  		org.springframework.web.servlet.DispatcherServlet
+  	</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name><!-- 얘한테 컨트롤러 알려줘야 함 -->
+  		<param-value>
+  			classpath:spring-context.xml
+  			classpath:spring-beans.xml
+  		</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup><!-- 우선순위 부여 -->
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
 </web-app>

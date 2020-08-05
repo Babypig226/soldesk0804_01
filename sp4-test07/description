@@ -8,3 +8,28 @@ window>preferences>server>runtime environments>apache tomcat확인(없을 시 ad
     	<version>2.2</version>
     	<scope>provided</scope>
     </dependency>
+     <dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>javax.servlet-api</artifactId>
+    	<version>3.0.1</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>${org.springframework-version}</version>
+    </dependency>
+    
+ IOC Controller 자동연결, Dispatcher 필요 없음, extends HttpServlet 필요없음
+ <mvc:annotation-driven/>: @Controller
+ <mvc:default-servlet-handler/>:루트 설정(최상위 디렉토리)
+ <mvc:view-resolvers>
+			<mvc:jsp prefix = "/"/>
+		</mvc:view-resolvers>
+prefix="/": jsp file이 src>main>wepapp에 있음.
+prefix="/WEB-INF/view/": jsp file이 src>main>wepapp>WEB-INF/view에 있음.
+<mvc:jsp suffix = ".jsp"/> : .jsp를 생략해서 쓰겠음	
+
+Spring: Default Package 필수	
+
+web.xml >> xml파일 개수만큼 등록
