@@ -20,8 +20,12 @@
 	 </mvc:view-resolvers>
 	 <!--prefix경로 지정-->
 	 <mvc:resources location="/WEB-INF/view/" mapping="/**" cache-period = "14400"/>
+	 <!-- controller 없이 사용 -->
+	 <mvc:view-controller path="/" view-name="index"/>
+	 
+	 
 	 <!-- 파일 업로드 -->
-	 <bean id = "multipartResolver" class = "org.springframwork.web.multipart.commons.CommonsMultipartResolver">
+	 <bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 	<property name="maxUploadSize" value = "1000000"/>
 	 	<property name="maxInMemorySize" value = "1000000"/>
 	 </bean>
