@@ -11,6 +11,7 @@ public class MemberInfoPrinter {
 	private MemberDAO memberDao;
 	@Autowired
 	private MemberPrinter printer;
+	
 	public void printMemberInfo(String email) {
 		MemberDTO memberDto = memberDao.selectByEmail(email);
 		if(memberDto == null) {

@@ -3,5 +3,23 @@
 default name : context 추가
 location: http://~~ context 추가
 
-@Autowired : 의존객체 자동주입(setter를 통한 의존객체 주입)
-@Service : service class file 입니다.(setter 자동 생성)
+<context:annotation-config/> replace constructor, property
+
+@Autowired : 의존객체 자동주입(setter를 통한 의존객체 주입) 생성자를 통해 객체주입 시 생성자 위에 작성. setter 동일
+	사용 이유: xml파일에 의존객체주입 기능 삭제를 위해(constructor, property를 쓰지 않기 위해)
+@Service : service class file 입니다.
+
+class 파일에는 setter가 존재하지만 source 파일에만 존재하지 않음.
+setter는 compile 시 class file에 생성
+
+spring: single tone only
+같은 객체를 여러개 생성해야 할 경우
+-<qualifier value = "" /> 주기
+사용 시 : 
+매개변수에서 사용시
+(@Qualifier("value") args)
+멤버필드에서 사용시
+@Qualifier("value")
+
+
+@Resource(name="") : 의존객체 이름 적어주는 기능 Resource사용 시 Autowired사용하지 않음

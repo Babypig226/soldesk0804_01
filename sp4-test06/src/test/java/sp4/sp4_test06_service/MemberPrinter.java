@@ -1,7 +1,7 @@
 package sp4.sp4_test06_service;
 
-import sp4.sp4_test06_DTO.MemberDTO;
 
+import sp4.sp4_test06_DTO.MemberDTO;
 public class MemberPrinter {
 
 	public void print(MemberDTO memberDTO) {

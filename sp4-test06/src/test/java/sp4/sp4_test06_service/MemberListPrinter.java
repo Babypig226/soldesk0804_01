@@ -13,7 +13,7 @@ public class MemberListPrinter {
 	private MemberDAO memberDao;
 	@Autowired
 	private MemberPrinter printer;
-	//의존객체 주입: Dependency Injection 생성자 이용
+
 	public MemberListPrinter(MemberDAO memberDao, MemberPrinter printer) {
 		this.memberDao = memberDao;
 		this.printer = printer;
