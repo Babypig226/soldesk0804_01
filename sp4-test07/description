@@ -1,0 +1,10 @@
+html x박스 > Build Path > Library > Server Runtime > Tomcat
+없을 시,
+window>preferences>server>runtime environments>apache tomcat확인(없을 시 add)
+    <!-- web service -->
+    <dependency>
+    	<groupId>javax.servlet.jsp</groupId>
+    	<artifactId>jsp-api</artifactId>
+    	<version>2.2</version>
+    	<scope>provided</scope>
+    </dependency>
