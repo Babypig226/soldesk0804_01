@@ -8,13 +8,13 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 		<!-- 의존객체 자동주입 constructor, property 필요 없음-->
 		<context:annotation-config/>
-		<bean id = "memberDao" class = "Spring.MemberDAO"/>
-		<bean id = "printer" class = "Spring.MemberDAO"/>
-		<bean id = "memberRegisterService" class = "Main.service.MemberRegisterService"/>
-		<bean id = "memberListPrinter" class = "Main.service.MemberListPrinter"/>
-		<bean id = "changePasswordService" class = "Main.service.ChangePasswordService"/>
+		<bean id = "memberDao" class = "sp4.sp4_test06_DTO.MemberDAO"/>
+		<bean id = "printer" class = "sp4.sp4_test06_service.MemberPrinter"/>
+		<bean id = "memberRegisterService" class = "sp4.sp4_test06_service.MemberRegisterService"/>
+		<bean id = "memberListPrinter" class = "sp4.sp4_test06_service.MemberListPrinter"/>
+		<bean id = "changePasswordService" class = "sp4.sp4_test06_service.ChangePasswordService"/>
 			<!-- ChangePasswordService changePasswordService = new ChangePasswordService();
 					changePasswordService.setDao(memberDao) -->
-		<bean id = "memberInfoPrinter" class = "Main.service.MemberInfoPrinter"/>
+		<bean id = "memberInfoPrinter" class = "sp4.sp4_test06_service.MemberInfoPrinter"/>
 
 </beans>
