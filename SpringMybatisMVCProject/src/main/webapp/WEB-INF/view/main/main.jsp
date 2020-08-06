@@ -53,7 +53,7 @@ $(function(){
 	
 	<tr>
 		<td colspan="3">
-			<a href="mem/memberAgree.mem">회원가입</a>&nbsp;
+			<a href="register/agree">회원가입</a>&nbsp;
 			<a href="mem/idCk.mem">아이디 찾기</a>&nbsp;
 			<a href="">비밀번호 찾기</a>&nbsp;
 		</td>

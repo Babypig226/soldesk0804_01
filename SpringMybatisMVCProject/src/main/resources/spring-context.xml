@@ -29,5 +29,10 @@
 	 	<property name="maxUploadSize" value = "1000000"/>
 	 	<property name="maxInMemorySize" value = "1000000"/>
 	 </bean>
+	 
+	 <!-- 암호화 -->
+	 <bean id = "bcryptPasswordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	 	<constructor-arg value = "10"/>
+	 </bean>
 		 
 </beans>
