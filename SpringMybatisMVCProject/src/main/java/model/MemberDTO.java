@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
-	String userId;
-	String userPw;
+	String userId ;
+	String userPw  ; 
 	String userName;
-	Timestamp userBirth;
+	String userBirth;
 	String userGender;
 	String userEmail;
 	String userAddr;
@@ -21,5 +22,5 @@ public class MemberDTO {
 	Timestamp userRegist;
 	String joinOk;
 	String interests;
-
+	StartEndPageDTO startEndPageDTO;
 }

@@ -1,37 +1,64 @@
 package service.member;
 
-import java.sql.Timestamp;
+//import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import command.MemberCommand;
+import controller.MailService;
+import controller.smsSend;
 import model.MemberDTO;
-
+import repository.MemberRepository;
+@Service
 public class MemberJoinService {
 	@Autowired
+	MailService mailService;
+	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	MemberRepository memberRepository;
 	public Integer execute(MemberCommand memberCommand) {
 		Integer result = null;
-		MemberDTO memberDto = new MemberDTO();
-		memberDto.setUserId(memberCommand.getUserId());
-		memberDto.setUserName(memberCommand.getUserName());
-		Timestamp userBirth = new Timestamp(memberCommand.getUserBirth().getTime());
-		memberDto.setUserBirth(userBirth);
-		memberDto.setUserGender(memberCommand.getUserGender());
-		memberDto.setUserEmail(memberCommand.getUserEmail());
-		memberDto.setUserAddr(memberCommand.getUserAddr());
-		memberDto.setUserPh1(memberCommand.getUserPh1());
-		memberDto.setUserPh2(memberCommand.getUserPh2());
-		String interests = "";
-		for (String str : memberCommand.getInterests()) {
-			interests += str + "`";
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setUserAddr(memberCommand.getUserAddr());
+//		Timestamp userBirth = 
+//				new Timestamp(
+//						memberCommand.getUserBirth().getTime());
+		memberDTO.setUserBirth(memberCommand.getUserBirth());
+		memberDTO.setUserEmail(memberCommand.getUserEmail());
+		memberDTO.setUserGender(memberCommand.getUserGender());
+		memberDTO.setUserId(memberCommand.getUserId());
+		memberDTO.setUserName(memberCommand.getUserName());
+		memberDTO.setUserPh1(memberCommand.getUserPh1());
+		memberDTO.setUserPh2(memberCommand.getUserPh2());
+		String interest = "";
+		for(String iter : memberCommand.getInterest()) {
+			interest += iter + "`";
 		}
-		memberDto.setInterests(interests);
-		memberDto.setUserPw(bcryptPasswordEncoder.encode(memberCommand.getUserPw()));
-		System.out.println(memberCommand.getUserPw());
-		System.out.println(memberDto.getUserPw());
+		memberDTO.setInterests(interest);
+		memberDTO.setUserPw(bcryptPasswordEncoder.encode(
+				memberCommand.getUserPw()));
+		result = memberRepository.insertMember(memberDTO);
+		if(result != null) {
+			try {
+				mailService.sendMail(memberDTO.getUserEmail(), memberDTO.getUserId());	
+				smsSend ss = new smsSend();
+				ss.smsSend(memberDTO.getUserPh1(),memberDTO.getUserName()+"님 회원가입을 축하합니다.");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return result;
 	}
+	public Integer numUpdate(String num, String receiver, String userId) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setJoinOk(num);
+		memberDTO.setUserEmail(receiver);
+		memberDTO.setUserId(userId);
+		return memberRepository.joinOkUpdate(memberDTO);
+	}
+	}
+		
 
-}

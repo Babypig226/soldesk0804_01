@@ -19,7 +19,7 @@
   <repositories>
 	 <repository>
 	   <id>oracle</id>
-	   <url>http://maven.jahia.org/maven2</url><!-- ojdbc repository 설정 -->
+	   <url>http://maven.jahia.org/maven2</url>
 	 </repository>
   </repositories>
   
@@ -30,13 +30,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <!-- setter/getter 및 constructor 자동생성 -->
-	<dependency>
-	    <groupId>org.projectlombok</groupId>
-	    <artifactId>lombok</artifactId>
-		<version>1.18.12</version>
-		<scope>provided</scope>
-	</dependency>
+    <!-- setter/getter constructor 자동 생성 -->
+    <dependency>
+    	<groupId>org.projectlombok</groupId>
+    	<artifactId>lombok</artifactId>
+    	<version>1.18.12</version>
+    	<scope>provided</scope>
+    </dependency>
     <!-- 스프링  -->
     <dependency>
     	<groupId>org.springframework</groupId>
@@ -186,7 +186,6 @@
 		<version>1.1</version>
 		<scope>provided</scope>
 	</dependency>
-
 	
   </dependencies>
   <build>

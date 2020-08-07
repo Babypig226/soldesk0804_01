@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace = "member">
-		
-	</mapper>
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.member.memberMapper">
+<sql id="basecolumn">
+	USER_ID,USER_PW,USER_NAME, USER_BIRTH, USER_GENDER, 
+	USER_EMAIL,USER_ADDR,USER_PH1, USER_PH2,interests,USER_REGIST
+</sql>
+<insert id="insertMember" parameterType="mem">
+	insert into member (<include refid="basecolumn" />)
+	values(#{userId}, #{userPw},#{userName},#{userBirth},
+	#{userGender},#{userEmail},#{userAddr},#{userPh1},
+	#{userPh2},#{interests},sysdate)
+</insert>
+<update id="joinOkUpdate" parameterType = "mem">
+	update member set join_ok = #{joinOk} where user_id = #{userId} and user_email = #{userEmail} and join_ok is null
+</update>
+<resultMap type = "mem" id = "baseMember">
+	<id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+	<result column="USER_PW" jdbcType="VARCHAR" property="userPw"/>
+	<result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+	<result column="USER_BIRTH" jdbcType="TIMESTAMP" property="userBirth"/>
+	<result column="USER_GENDER" jdbcType="VARCHAR" property="userGender"/>
+	<result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail"/>
+	<result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr"/>
+	<result column="USER_PH1" jdbcType="VARCHAR" property="userPh1"/>
+	<result column="USER_PH2" jdbcType="VARCHAR" property="userPh2"/>
+	<result column="USER_REGIST" jdbcType="TIMESTAMP" property="userRegist"/>
+	<result column="JOIN_OK" jdbcType="VARCHAR" property="joinOk"/>
+	<result column="INTERESTS" jdbcType="VARCHAR" property="interests"/>
+</resultMap>
+<select id="selectMember" parameterType = "mem" resultMap="baseMember">
+	select <include refid="basecolumn"/> from member
+	<trim prefix = "where" prefixOverrides="AND | OR">
+		<if test="userPw != null">
+			user_pw = #{userPw}
+		</if>
+		<if test="userId != null and joinOk == null">
+			and user_id = #{userId} and join_ok is not null
+		</if>
+		<if test="userId != null and joinOk != null">
+			and user_id = #{userId}
+		</if>
+	</trim>
+</select>
+</mapper>

@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	잘되길바라..
-	<script type="text/javascript">
+잘되나요?
+ 	<script type="text/javascript">
 		location.href="main"
 	</script>
 </body>
