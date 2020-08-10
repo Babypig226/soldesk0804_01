@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ include file = "../include/include.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,69 +10,57 @@
 	src="http://code.jquery.com/jquery-latest.js" ></script>
 <script type="text/javascript">
 $(function(){
-	$("#modify").click(function(){
-		if($("#pw").val()==""){
-			alert("비밀번호 입력하세요");
-			$("#pw").focus();
-			return false;
-		}
-		$("#frm").submit();
-	});
 	$("#memPw").click(function(){
-		location.href="memPw.nhn";
-	})
+		location.href="Password/${memberCommand.userId}"
+	});
+
 });
 </script>
 </head>
 <body>
-<c:if test="${empty memId}">
-	<script>
-		location.href="index.nhn";
-	</script>
-</c:if>
-<form name ="frm" id ="frm" method = "post" action ="memberModifyPro.nhn">
+<form:form name ="frm" id ="frm" method = "post" action ="memberModifyPro" commandName = "memberCommand">
+<form:hidden path = "userId"  />
+<form:hidden path = "userName"  />
+<form:hidden path = "userBirth"  />
+<form:hidden path = "userGender"  />
 <table border = 1  width = 600 align = "center" cellpadding = 3 >
 	<tr><td colspan=2> 회원정보 수정 </td></tr>
 	<tr><td >아이디와 비번</td>
 		<td >&nbsp;</td></tr>
-	<tr><td>사용자 ID</td><td></td></tr>
+	<tr><td>사용자 ID</td><td>${memberCommand.userId}</td></tr>
 	<tr><td>비밀번호</td>
-		<td><input type="password" id="pw" name ="userPw" />
+		<td><input type="password" id="pw" name ="userPw" /><form:errors path = "userPw"/>
 		  <div></div>
 		  </td>
 	</tr>
 	<tr><td >기본정보 입력</td>
 		<td >&nbsp;</td></tr>
 	<tr><td>사용자 이름</td>
-		<td></td>
+		<td>${memberCommand.userName}</td>
 	</tr>
 	<tr><td> 생년월일 및 성별</td>
-		<td></td>
+		<td> ${memberCommand.userBirth} / ${memberCommand.userGender}</td>
 	</tr>
 	<tr><td>사용자 이메일</td>
-	    <td><input type ="text" id ="email" name ="userEmail" 
-	        value = ""/></td></tr>
+	    <td><form:input path = "userEmail" /><form:errors path = "userEmail"/>  </td></tr>
 	<tr><td>사용자 주소</td>
 	    <td>
-	    <input type ="text" id ="addr" name ="userAddr" 
-	        value = ""/>
+	    <form:input path ="userAddr"/><form:errors path = "userAddr"/>
 	    </td>
 	</tr>
 	<tr><td>연락처 1</td>
 	    <td>
-	    <input type ="text" id ="memberPh1" name ="userPh1" 
-	        value = ""/>
+	    <form:input path ="userPh1" /><form:errors path = "userPh1"/>
 	    </td>
 	</tr>
 	<tr><td>연락처 2</td>
 	    <td>
-	    <input type ="text" id ="memberPh2" name ="userPh2" 
-	        value = ""/>
+	    <form:input path ="userPh2"/>
 	    </td>
 	</tr>
 	<tr>
 		<td colspan=2>
-		<input type="button" name="modify" id ="modify" 
+		<input type="submit" name="modify" id ="modify" 
 				value="수   정" >
 		<input type="button" value="취  소" 
 			onclick = "javascript:history.back();" />
@@ -81,6 +70,6 @@ $(function(){
 	</tr>
 </table>
 
-</form>
+</form:form>
 </body>
 </html>

@@ -11,34 +11,34 @@
 <script type="text/javascript">
 $(function(){
 	$("#modify").click(function(){
-		location.href="memberPw.mem"
+		location.href="memberPw.mem";
 	});
 	$("#memDel").click(function(){
-		location.href="memberUserDel.mem"
+		location.href="memberUserDel.mem";
 	});
 	$("#pwModify").click(function(){
-		location.href="memberPwForm.mem"
+		location.href="<c:url value = '/edit/memberPwForm'/>";
 	});
 });
 </script>
 </head>
 <body>
-이름 : ${dto.userName }<br />
-아이디 : ${dto.userId }<br />
-이메일  : ${dto.userEmail }<br />
-생년월일  : ${dto.userBirth }<br />
+이름 : ${memberCommand.userName }<br />
+아이디 : ${memberCommand.userId }<br />
+이메일  : ${memberCommand.userEmail }<br />
+생년월일  : ${memberCommand.userBirth }<br />
 성별 : <c:choose >
-	  	<c:when test="${dto.userGender == 'M'}">
+	  	<c:when test="${memberCommand.userGender == 'M'}">
 	  		  		남자
 	  	</c:when>
-	  	<c:when test="${dto.userGender == 'F'}">
+	  	<c:when test="${memberCommand.userGender == 'F'}">
 	  		여자
 	  	</c:when>
 	  </c:choose> <br />
-연락처 1 : ${dto.userPh1 }<br />
-연락처 2 : ${dto.userPh2 }<br />
-등록일 : ${dto.userRegist }<br />
-주소  : ${dto.userAddr }<br />
+연락처 1 : ${memberCommand.userPh1 }<br />
+연락처 2 : ${memberCommand.userPh2 }<br />
+등록일 : ${memberCommand.userRegist }<br />
+주소  : ${memberCommand.userAddr }<br />
 <input type="button" name="modify" id ="modify" value="수   정" >
 <input type="button" name="pwModify" id ="pwModify" value="비밀번호" >
 <input type="button" value="취  소" 

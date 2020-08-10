@@ -38,8 +38,8 @@
 <tr>
 <td colspan="3">
 <a href="register/agree">회원가입</a>&nbsp;
-<a href="mem/idCk">아이디 찾기</a>&nbsp;
-<a href="">비밀번호 찾기</a>&nbsp;
+<a href="<c:url value = 'edit/findUserId'/>">아이디 찾기</a>&nbsp;
+<a href="<c:url value = 'edit/findPassword'/>">비밀번호 찾기</a>&nbsp;
 </td>
 </tr>
 </table>
@@ -49,7 +49,7 @@
 <!-- 로그인 된 경우 -->
 <a href="mem/memberDetail">내정보</a>
 <a href="<c:url value ='/login/logout'/>">로그아웃</a><!-- 절대경로 -->
-<a href="mem/meberList">회원리스트</a>
+<a href="mem/memberList">회원리스트</a>
 <a href="qna/qnaList">공지사항 게시판</a>
 <a href="lib/libBoardList">자료 게시판</a>
 <a href="ans/ansBoardList"">답변형 게시판</a>

@@ -30,17 +30,42 @@
 	<result column="INTERESTS" jdbcType="VARCHAR" property="interests"/>
 </resultMap>
 <select id="selectMember" parameterType = "mem" resultMap="baseMember">
-	select <include refid="basecolumn"/> from member
-	<trim prefix = "where" prefixOverrides="AND | OR">
-		<if test="userPw != null">
-			user_pw = #{userPw}
-		</if>
-		<if test="userId != null and joinOk == null">
-			and user_id = #{userId} and join_ok is not null
-		</if>
-		<if test="userId != null and joinOk != null">
-			and user_id = #{userId}
-		</if>
-	</trim>
+		select * 
+		from (select rowNum rn, <include refid="basecolumn"/>
+			 from(
+			select <include refid="basecolumn"/> from member
+			<trim prefix = "where" prefixOverrides="AND | OR">
+				<if test="userPw != null">
+					user_pw = #{userPw}
+				</if>
+				<if test="userId != null and joinOk == null">
+					and user_id = #{userId} and join_ok is not null
+				</if>
+				<if test="userId != null and joinOk != null">
+					and user_id = #{userId}
+				</if>
+			</trim>
+			order by user_regist desc
+			)
+		)
+
 </select>
+<select id="memberCount" resultType="int">
+	select count(*) from member 
+</select>
+<update id="memberUpdate" parameterType = "mem">
+	update member
+	<trim prefix = "set" suffixOverrides = ",">
+	<if test = "userEmail != null">USER_EMAIL = #{userEmail},</if>
+	<if test = "userAddr != null">USER_ADDR = #{userAddr},</if>
+	<if test = "userPh1 != null">USER_PH1 = #{userPh1},</if>
+	<if test = "userPh2 != null">USER_PH2 = #{userPh2},</if>
+	</trim>
+	where USER_ID = #{userId}
+</update>
+<update id="passwordUpdate" parameterType="mem">
+	update member
+	set user_pw = #{userPw}
+	where user_id = #{userId} and user_email = #{userEmail}
+</update>
 </mapper>

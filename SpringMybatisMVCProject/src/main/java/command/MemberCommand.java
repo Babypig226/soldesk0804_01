@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCommand {
-	String userId;
+		String userId;
+		String oldPw;
 	   String userPw;
 	   String userPwCon;
 	   String userName;

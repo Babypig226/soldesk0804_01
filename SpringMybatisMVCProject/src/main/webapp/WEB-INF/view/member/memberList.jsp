@@ -22,10 +22,10 @@
 	<td align="center">이메일</td>
 	<td align="center">등록일</td>
 </tr>
-<c:forEach var="dto" items="${memberList }" >
+<c:forEach var="dto" items="${lists}" >
 <tr align="center" valign="middle">
 	<td align="center">
-		<a href ="memberInfo.mem?userId=${dto.userId }">
+		<a href ="memberInfo/${dto.userId }">
 			${dto.userId }
 		</a>
 	</td>
@@ -39,8 +39,16 @@
 </tr>
 </c:forEach>
 </table>
+<table>
+	<tr align = "center" height = "20">
+		<td colspan = "5" style = font-family:Tohoma; font-size:10pt;>
+			<%@ include file = "../include/includePage.jsp" %>
+		</td>
+	</tr>
+</table>
+
 <table width=50%>
-<tr align="right"><td><a href="memberRegist.mem" >회원등록</a></td></tr>
+<tr align="right"><td><a href="<c:url value = '/register/agree'/>" >회원등록</a></td></tr>
 </table>
 </center>
 </body>

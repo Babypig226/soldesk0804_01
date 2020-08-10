@@ -8,9 +8,10 @@
 </head>
 <body>
 
-<form action = "pwModify1.mem" method="post" name="frm" >
+<form action = "pwModify1" method="post" name="frm" >
+	<input type = "hidden" name = "userId" value = "${userId}" />
 	비밀번호 : <input type="password" name = "userPw" id = "pw" /><br />
-	<br />
+	<br /><div>${err}</div>
 	<input type="submit" value="확인" />
 </form>
 </body>
